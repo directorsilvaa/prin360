@@ -3,11 +3,16 @@ import { motion, useAnimation } from 'framer-motion';
 import { 
   ArrowRight, MessageCircle, BarChart2, Users, ShoppingCart, 
   Instagram, Facebook, Twitter, Youtube, TrendingUp, Target,
-  DollarSign, LineChart, PieChart, Share2, Globe, Zap, Rocket
+  DollarSign, LineChart, PieChart, Share2, Globe, Zap, Rocket,
+  UserPlus, UsersRound
 } from 'lucide-react';
 import AnimatedBackground from './AnimatedBackground';
 
-const Home = () => {
+interface HomeProps {
+  onAboutClick: () => void;
+}
+
+const Home = ({ onAboutClick }: HomeProps) => {
   const [windowWidth, setWindowWidth] = useState(typeof window !== 'undefined' ? window.innerWidth : 0);
   const controls = useAnimation();
 
@@ -21,7 +26,7 @@ const Home = () => {
   }, []);
 
   const getResponsiveRadius = (baseRadius: number) => {
-    if (windowWidth < 640) return baseRadius * 0.3; // Reduced for mobile
+    if (windowWidth < 640) return baseRadius * 0.3;
     if (windowWidth < 1024) return baseRadius * 0.7;
     return baseRadius;
   };
@@ -184,6 +189,7 @@ const Home = () => {
               
               <div className="mt-6 sm:mt-8 lg:mt-12">
                 <motion.button 
+                  onClick={onAboutClick}
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                   className="inline-flex items-center px-6 sm:px-8 py-2.5 sm:py-3 border border-transparent text-sm sm:text-base font-medium rounded-lg text-white bg-blue-600 hover:bg-blue-700 transition-colors duration-300"
@@ -369,6 +375,82 @@ const Home = () => {
               ))}
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Team Section */}
+      <div className="relative py-24">
+        {/* Background Effects */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-blue-500/5 via-purple-500/5 to-transparent"></div>
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-blue-500/20 rounded-full blur-3xl opacity-20"></div>
+          <div className="absolute top-1/3 right-1/4 w-[200px] h-[200px] bg-purple-500/20 rounded-full blur-[80px] animate-pulse" style={{ animationDelay: '1s' }}></div>
+          <div className="absolute bottom-1/3 left-1/4 w-[200px] h-[200px] bg-cyan-500/20 rounded-full blur-[80px] animate-pulse" style={{ animationDelay: '2s' }}></div>
+        </div>
+
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center max-w-3xl mx-auto"
+          >
+            <h2 className="text-4xl sm:text-5xl font-bold mb-4">
+              tenha um time
+            </h2>
+            <h3 className="text-3xl sm:text-4xl font-bold mb-6">
+              <span className="text-yellow-500">exclusivo ou compartilhado</span>
+            </h3>
+            <p className="text-lg text-gray-300 mb-12">
+              para construir o seu projeto, montamos uma estrutura que atende o seu momento
+            </p>
+
+            {/* Team Icons */}
+            <div className="flex justify-center items-center gap-8 mb-12">
+              {/* Exclusive Team Icon */}
+              <motion.div
+                initial={{ scale: 0.8, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="relative group"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full blur opacity-40 group-hover:opacity-75 transition-opacity duration-300"></div>
+                <div className="relative bg-white p-8 rounded-full">
+                  <UsersRound className="w-16 h-16 text-black" />
+                </div>
+              </motion.div>
+
+              {/* Shared Team Icon */}
+              <motion.div
+                initial={{ scale: 0.8, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+                className="relative group"
+              >
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full blur opacity-40 group-hover:opacity-75 transition-opacity duration-300"></div>
+                <div className="relative bg-white p-8 rounded-full">
+                  <UserPlus className="w-16 h-16 text-black" />
+                </div>
+              </motion.div>
+            </div>
+
+            {/* CTA Button */}
+            <motion.a
+              href="https://calendly.com/your-calendar-link"
+              target="_blank"
+              rel="noopener noreferrer"
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+              className="inline-block px-8 py-4 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-colors duration-300 shadow-lg hover:shadow-green-600/25"
+            >
+              Agendar reunião
+            </motion.a>
+          </motion.div>
         </div>
       </div>
     </div>

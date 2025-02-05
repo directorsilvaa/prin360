@@ -7,6 +7,7 @@ import Register from './components/Register';
 import Blog from './components/Blog';
 import About from './components/About';
 import Dashboard from './components/Dashboard';
+import Footer from './components/Footer';
 
 // Test user credentials
 const TEST_USER = {
@@ -54,6 +55,7 @@ function App() {
           onAboutClick={() => setCurrentView('about')}
         />
         <Team />
+        <Footer />
       </>
     );
   }
@@ -69,6 +71,7 @@ function App() {
           onAboutClick={() => setCurrentView('about')}
         />
         <Blog />
+        <Footer />
       </>
     );
   }
@@ -84,6 +87,7 @@ function App() {
           onAboutClick={() => setCurrentView('about')}
         />
         <About />
+        <Footer />
       </>
     );
   }
@@ -98,7 +102,8 @@ function App() {
         onBlogClick={() => setCurrentView('blog')}
         onAboutClick={() => setCurrentView('about')}
       />
-      <Home />
+      <Home onAboutClick={() => setCurrentView('about')} />
+      <Footer />
     </>
   );
 }

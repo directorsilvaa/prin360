@@ -22,6 +22,15 @@ export default function Navbar({ onLoginClick, onHomeClick, onTeamClick, onBlogC
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const handleNavClick = (handler: () => void) => {
+    // Smooth scroll to top
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Close mobile menu if open
+    setIsMenuOpen(false);
+    // Execute the navigation handler
+    handler();
+  };
+
   return (
     <nav className={`fixed w-full z-50 transition-all duration-300 ${
       scrolled ? 'bg-black/80 backdrop-blur-lg shadow-lg' : 'bg-transparent'
@@ -30,7 +39,7 @@ export default function Navbar({ onLoginClick, onHomeClick, onTeamClick, onBlogC
         <div className="flex items-center justify-between h-14 sm:h-16 md:h-20">
           {/* Logo */}
           <div className="flex items-center">
-            <div className="relative group cursor-pointer" onClick={onHomeClick}>
+            <div className="relative group cursor-pointer" onClick={() => handleNavClick(onHomeClick)}>
               <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-600 to-blue-400 rounded-full blur opacity-30 group-hover:opacity-100 transition duration-500"></div>
               <div className="relative flex items-center">
                 <svg width="40" height="40" viewBox="0 0 200 200" className="text-blue-500">
@@ -54,28 +63,28 @@ export default function Navbar({ onLoginClick, onHomeClick, onTeamClick, onBlogC
           <div className="hidden md:block">
             <div className="flex items-center space-x-1">
               <button
-                onClick={onHomeClick}
+                onClick={() => handleNavClick(onHomeClick)}
                 className="relative px-4 py-2 text-sm font-medium text-gray-300 hover:text-white transition-colors duration-300 group"
               >
                 Home
                 <span className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
               </button>
               <button
-                onClick={onAboutClick}
+                onClick={() => handleNavClick(onAboutClick)}
                 className="relative px-4 py-2 text-sm font-medium text-gray-300 hover:text-white transition-colors duration-300 group"
               >
                 Sobre
                 <span className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
               </button>
               <button
-                onClick={onTeamClick}
+                onClick={() => handleNavClick(onTeamClick)}
                 className="relative px-4 py-2 text-sm font-medium text-gray-300 hover:text-white transition-colors duration-300 group"
               >
                 Equipe
                 <span className="absolute bottom-0 left-0 w-full h-0.5 bg-blue-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></span>
               </button>
               <button
-                onClick={onBlogClick}
+                onClick={() => handleNavClick(onBlogClick)}
                 className="relative px-4 py-2 text-sm font-medium text-gray-300 hover:text-white transition-colors duration-300 group"
               >
                 Blog
@@ -87,7 +96,7 @@ export default function Navbar({ onLoginClick, onHomeClick, onTeamClick, onBlogC
           {/* Desktop CTA */}
           <div className="hidden md:flex items-center">
             <button 
-              onClick={onLoginClick}
+              onClick={() => handleNavClick(onLoginClick)}
               className="relative inline-flex items-center justify-center px-6 py-2 overflow-hidden font-medium text-white transition duration-300 ease-out border-2 border-blue-500 rounded-lg shadow-md group"
             >
               <span className="absolute inset-0 flex items-center justify-center w-full h-full text-white duration-300 -translate-x-full bg-blue-600 group-hover:translate-x-0 ease">
@@ -120,47 +129,32 @@ export default function Navbar({ onLoginClick, onHomeClick, onTeamClick, onBlogC
         }`}>
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-black/90 backdrop-blur-lg rounded-lg mb-4">
             <button
-              onClick={() => {
-                onHomeClick();
-                setIsMenuOpen(false);
-              }}
+              onClick={() => handleNavClick(onHomeClick)}
               className="block w-full text-left px-3 py-2 text-sm font-medium text-gray-300 hover:text-white hover:bg-blue-600/10 rounded-lg transition-all duration-300"
             >
               Home
             </button>
             <button
-              onClick={() => {
-                onAboutClick();
-                setIsMenuOpen(false);
-              }}
+              onClick={() => handleNavClick(onAboutClick)}
               className="block w-full text-left px-3 py-2 text-sm font-medium text-gray-300 hover:text-white hover:bg-blue-600/10 rounded-lg transition-all duration-300"
             >
               Sobre
             </button>
             <button
-              onClick={() => {
-                onTeamClick();
-                setIsMenuOpen(false);
-              }}
+              onClick={() => handleNavClick(onTeamClick)}
               className="block w-full text-left px-3 py-2 text-sm font-medium text-gray-300 hover:text-white hover:bg-blue-600/10 rounded-lg transition-all duration-300"
             >
               Equipe
             </button>
             <button
-              onClick={() => {
-                onBlogClick();
-                setIsMenuOpen(false);
-              }}
+              onClick={() => handleNavClick(onBlogClick)}
               className="block w-full text-left px-3 py-2 text-sm font-medium text-gray-300 hover:text-white hover:bg-blue-600/10 rounded-lg transition-all duration-300"
             >
               Blog
             </button>
             
             <button 
-              onClick={() => {
-                onLoginClick();
-                setIsMenuOpen(false);
-              }}
+              onClick={() => handleNavClick(onLoginClick)}
               className="w-full mt-3 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-all duration-300 shadow-lg shadow-blue-600/20 text-sm"
             >
               Área do Cliente
