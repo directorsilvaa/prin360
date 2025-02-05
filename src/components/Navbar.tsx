@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Code2 } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 
 interface NavbarProps {
   onLoginClick: () => void;
@@ -33,7 +33,18 @@ export default function Navbar({ onLoginClick, onHomeClick, onTeamClick, onBlogC
             <div className="relative group cursor-pointer" onClick={onHomeClick}>
               <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-600 to-blue-400 rounded-full blur opacity-30 group-hover:opacity-100 transition duration-500"></div>
               <div className="relative flex items-center">
-                <Code2 className="w-8 h-8 sm:w-9 sm:h-9 md:w-10 md:h-10 text-blue-500" />
+                <svg width="40" height="40" viewBox="0 0 200 200" className="text-blue-500">
+                  <g transform="translate(20, 20)">
+                    <path
+                      fill="currentColor"
+                      d="M80 0C35.817 0 0 35.817 0 80c0 44.183 35.817 80 80 80 44.183 0 80-35.817 80-80C160 35.817 124.183 0 80 0zm0 150c-38.66 0-70-31.34-70-70s31.34-70 70-70 70 31.34 70 70-31.34 70-70 70z"
+                    />
+                    <path
+                      fill="currentColor"
+                      d="M80 20c-33.137 0-60 26.863-60 60s26.863 60 60 60 60-26.863 60-60-26.863-60-60-60zm0 100c-22.091 0-40-17.909-40-40s17.909-40 40-40 40 17.909 40 40-17.909 40-40 40z"
+                    />
+                  </g>
+                </svg>
                 <span className="ml-2 text-white font-semibold">Print 360</span>
               </div>
             </div>
