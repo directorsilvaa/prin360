@@ -4,12 +4,18 @@ import { Mail, Lock, Eye, EyeOff, ArrowLeft } from 'lucide-react';
 interface LoginProps {
   onRegisterClick: () => void;
   onBackClick: () => void;
+  onLogin: (email: string, password: string) => void;
 }
 
-export default function Login({ onRegisterClick, onBackClick }: LoginProps) {
+export default function Login({ onRegisterClick, onBackClick, onLogin }: LoginProps) {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    onLogin(email, password);
+  };
 
   return (
     <div className="min-h-screen bg-[#0B0F19] flex items-center justify-center p-4 relative overflow-hidden">
@@ -44,10 +50,11 @@ export default function Login({ onRegisterClick, onBackClick }: LoginProps) {
               </div>
               <h2 className="text-xl sm:text-2xl font-bold text-white">Área do Cliente</h2>
               <p className="text-sm sm:text-base text-gray-400">Acesse sua conta para continuar</p>
+              <p className="text-xs text-blue-400 mt-2">Use as credenciais de teste:<br/>Email: matheus@teste.com<br/>Senha: teste123</p>
             </div>
 
             {/* Form */}
-            <form onSubmit={(e) => e.preventDefault()} className="space-y-4 sm:space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
               <div className="space-y-3 sm:space-y-4">
                 {/* Email field */}
                 <div>
@@ -64,6 +71,7 @@ export default function Login({ onRegisterClick, onBackClick }: LoginProps) {
                         onChange={(e) => setEmail(e.target.value)}
                         className="block w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-gray-900/90 border-0 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 transition-all duration-200 text-sm sm:text-base"
                         placeholder="seu@email.com"
+                        required
                       />
                       <Mail className="absolute right-3 top-1/2 -translate-y-1/2 h-4 w-4 sm:h-5 sm:w-5 text-gray-400 pointer-events-none" />
                     </div>
@@ -85,6 +93,7 @@ export default function Login({ onRegisterClick, onBackClick }: LoginProps) {
                         onChange={(e) => setPassword(e.target.value)}
                         className="block w-full px-3 sm:px-4 py-2.5 sm:py-3 bg-gray-900/90 border-0 rounded-lg text-white placeholder-gray-400 focus:ring-2 focus:ring-blue-500 transition-all duration-200 text-sm sm:text-base"
                         placeholder="Sua senha"
+                        required
                       />
                       <button
                         type="button"
