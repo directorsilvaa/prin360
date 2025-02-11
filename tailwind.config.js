@@ -3,8 +3,15 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
-      animation: {
-        'pulse': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+      colors: {
+        mint: '#7FFFD4',
+      },
+      backgroundSize: {
+        'size-200': '200% 200%',
+      },
+      backgroundPosition: {
+        'pos-0': '0% 0%',
+        'pos-100': '100% 100%',
       },
     },
   },
